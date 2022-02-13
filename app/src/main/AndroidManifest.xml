@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.android.broadcastreceiversample">
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.BroadcastReceiverSample">
+
+        <activity android:name=".fragmentTest.FragmentTestActivity">
+
+        </activity>
+
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--This is implicit broadcast as we don't need to register it,
+            it is almost ended only a few implicit broadcast can work now,
+            because whenever a broadcast triggers android system has to start a process for that application
+            if same broadcast is registered by several application then several application will start for one event.
+            that uses cpu and drain battery to overcome this issue android now imposed restriction on implicit broadcast.
+            only few implicit broadcast can work.-->
+        <receiver android:name=".MyBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".MyExplicitBroadcastReceiver" />
+
+    </application>
+
+</manifest>
